@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:sadeem_application/features/constilation/manager/constilation_cubit.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ import 'features/auth/presentation/manager/calculating_results/calculation_resul
 import 'features/auth/presentation/manager/calculating_results/calculation_result_state.dart';
 import 'features/auth/presentation/manager/maleOrFemalCubit/maleCubit.dart';
 import 'features/auth/presentation/manager/maleOrFemalCubit/maleState.dart';
+import 'features/constilation/views/constilation_home_widget.dart';
 import 'features/map/views/map_home.dart';
 import 'features/map/views/map_stars.dart';
 import 'firebase_options.dart';
@@ -54,6 +56,9 @@ void main() async{
         BlocProvider<CalculationResultCubit>(
           create: (context) => CalculationResultCubit(CalculatingResultInitial()),
         ),
+        BlocProvider<ConstilationCubit>(
+          create: (context) => ConstilationCubit(),
+        ),
 
       ],
       child:  SadeemApp(showOnBoarding: isOnboardingCompleted ,),
@@ -77,15 +82,17 @@ class SadeemApp extends StatelessWidget {
   final bool showOnBoarding;
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ConstilationCubit>(context).getcubitStars();
 
     return BlocBuilder<ThemeCubit, ThemeState>(
+
 
         builder: (context, state) {
           return  MaterialApp(
             theme: state.themeData ,
             debugShowCheckedModeBanner: false,
-            home:  SadeemMainApp(showOnboarding:  showOnBoarding,),
-            // home:  StarsDetails(),
+            // home:  SadeemMainApp(showOnboarding:  showOnBoarding,),
+            home:  ConstilationHomeWidget(),
           );
         }
     );

@@ -59,6 +59,8 @@ dependencies:
   webview_flutter: ^4.8.0
   level_map: ^0.2.0
   carousel_slider: ^5.0.0
+  panorama_viewer: ^2.0.0
+  dio: ^5.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -122,4 +124,5 @@ flutter:
     - assets/thre/
     - assets/map/
     - assets/stars/
+    - assets/stars2d/
 
